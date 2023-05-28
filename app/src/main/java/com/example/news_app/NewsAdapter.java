@@ -1,6 +1,9 @@
 package com.example.news_app;
 
+
+
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +37,19 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull NewsAdapter.ViewHolder holder, int position) {
         holder.title.setText(list.get(position).title);
         holder.description.setText(list.get(position).descripton);
+        holder.published.setText(list.get(position).published);
         Glide.with(context).load(list.get(position).image).into(holder.image);
+        String str = list.get(position).url;
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, WebView.class);
+                i.putExtra("url",str);
+                context.startActivity(i);
+
+            }
+        });
+
     }
 
     @Override
@@ -46,11 +61,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         TextView title;
         TextView description;
         ImageView image;
+        TextView published;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
             description = itemView.findViewById(R.id.descrition);
             image = itemView.findViewById(R.id.image);
+            published = itemView.findViewById(R.id.published);
         }
     }
 }

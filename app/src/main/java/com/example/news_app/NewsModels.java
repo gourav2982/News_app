@@ -9,6 +9,12 @@ import java.net.URL;
 public class NewsModels {
     String title,descripton;
     String image;
+    String published;
+    String url;
+
+    public String getPublished() {
+        return published;
+    }
 
     public String getTitle() {
         return title;
